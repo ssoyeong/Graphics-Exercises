@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute vec4 vPosition;
+varying vec4 fColor;
+
+void main()
+{
+	  // Convert from clipspace to colorspace.
+	  // Clipspace goes -1.0 to +1.0
+	  // Colorspace goes from 0.0 to 1.0
+    gl_Position = vPosition;	
+	fColor = gl_Position * 0.5 + 0.5; // >= 0
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+
+// we declare the same varying in the fragment shader.
+// WebGL will connect the varying in the vertex shader to the varying of the same name and type in the fragment shader.
+
+varying vec4 fColor;
+
+void main()
+{
+	gl_FragColor = fColor;
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="triangle_varying.js"></script>
+</head>
+
+<body>
+
+<canvas id="gl-canvas" width="400" height="300">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+</body>
+</html>
